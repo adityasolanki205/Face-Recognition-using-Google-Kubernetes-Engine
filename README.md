@@ -35,7 +35,6 @@ Below are the steps to setup the enviroment and run the codes:
 ```bash
     git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
 ```
-
 3. **Create an Docker Image of the application**: Now we will build a Docker image which will be used to be deployed on Kubernetes engine using the commands below. Run each command one by one.
 
 ```bash
@@ -62,8 +61,9 @@ Below are the steps to setup the enviroment and run the codes:
     # Setting Region Property for this activity
     gcloud config set compute/region us-central1
     
-    # Create Kubernetes cluster with 1 node. (Note if you are using Free GCP account, you can only create 1 node.)
-    gcloud container clusters create face-cluster --num-nodes=1
+    # Create Kubernetes cluster with 1 node. 
+    # (Note if you are using Free GCP account, you can only create 1 node.)
+    gcloud container clusters create face-cluster --num-nodes=1 
 ```
 ![](images/startup.jpg)
 
