@@ -67,7 +67,7 @@ Below are the steps to setup the enviroment and run the codes:
     # (Note if you are using Free GCP account, you can only create 1 node.)
     gcloud container clusters create face-cluster --num-nodes=1 
 ```
-![](images/create-cluster.jpg)
+![](images/create-cluster.gif)
 
 5. **Deploying the application on Kubernetres**: Now we will deploy the application on Kubernetes.
 
