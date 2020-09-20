@@ -92,7 +92,7 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](images/create-post-request.gif)
 
-8. **See the magic happen**: Run Request.py from local 
+7. **See the magic happen**: Run Request.py from local 
 
 ```bash
     python request.py
