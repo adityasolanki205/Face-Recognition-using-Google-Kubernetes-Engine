@@ -1,10 +1,10 @@
-# Facial Recognition using Flask
+# Facial Recognition using Kubernetes
 
-This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Cloud. The complete process to Train and test is present [here](https://github.com/adityasolanki205/Face-Recognition).
-This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 2 parts:
+This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Kubernetes Engine. This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training and testing this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 2 parts:
 
-1. **Setting up the application on Google Cloud**
-2. **Create a POST request to recognize faces**
+1. **To Create Docker Image of the Application**
+2. **To Create Kubernetes Cluster to deploy the image**
+3. **To Create a POST request to recognize faces**
 
 ![](expected.gif)
 
