@@ -1,6 +1,6 @@
 # Facial Recognition using Kubernetes
 
-This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Kubernetes Engine. This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training and testing this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 2 parts:
+This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Kubernetes Engine. This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training and testing this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 3 major parts:
 
 1. **To Create Docker Image of the Application**
 2. **To Create Kubernetes Cluster to deploy the image**
@@ -85,10 +85,20 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](images/request.jpg)
 
-7. **Create a POST request from Local**: Run Request.py file and see Face recognition happening on Google Cloud. This will save a final.jpg file as an output image where all know faces will be boxed.
+7. **Create a POST request from Local**: After this we will create a POST request from the local. To do that we will just run request.py from our local. There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
 
+```python
+    # Find Predict in Request.py file and 
+    # paste the External IP address of the Kubernetes cluster here
+    url = "http://<IP address from Kubernetes>:80/predict"
+```
+8. **See the magic happen**: Run Request.py from local 
+
+```bash
+    python request.py
+```
 ![](final.jpg)
-    
+
 **Note**: The boundary boxes are color coded:
 
     1. Aditya Solanki  : Yellow
