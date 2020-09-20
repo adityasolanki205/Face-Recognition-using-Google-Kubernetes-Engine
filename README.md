@@ -41,7 +41,7 @@ Below are the steps to setup the enviroment and run the codes:
 
 ```bash
     #Goto the 
-    cd Face-recognition-using-kubernetes
+    cd Face-Recognition-using-Kubernetes
     
     #Creating a Temporary variable to save the name of the project
     export PROJECT_ID=<Name or your Project>
