@@ -22,13 +22,6 @@ For the last one year, I have been part of a great learning curve wherein I have
 - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
 
 
-## Code Example
-
-```bash
-    # clone this repo:
-    git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
-```
-
 ## How to use?
 
 Below are the steps to setup the enviroment and run the codes:
