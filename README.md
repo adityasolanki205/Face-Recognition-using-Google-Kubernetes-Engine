@@ -19,13 +19,14 @@ For the last one year, I have been part of a great learning curve wherein I have
 - [TensorFlow](https://www.tensorflow.org/)
 - [scikit-learn](https://scikit-learn.org/stable/)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
 
 
 ## Code Example
 
 ```bash
     # clone this repo:
-    git clone https://github.com/adityasolanki205/Face-recognition-on-flask.git
+    git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
 ```
 
 ## How to use?
@@ -36,9 +37,11 @@ Below are the steps to setup the enviroment and run the codes:
 
 ![](images/singers.jpg)
 
-2. **Creating a Google Compute instance**: Now we have to create a Compute Engine Instance to deploy the app. To do that we will use **n1-standard-8** as it has larger processing power. For Boot Disk we will select **Ubuntu 18.04 LTS**. Also tick on the Allow Http traffic label to send/receive requests. At last create the instance.
+2. **Creating a Docker Image of the application**: Now we have to create a Image to deploy the application on GCP. To do that we will use **cloud sdk**. To copy the application we will clone the repository in the cloud SDK with the command
 
-![](images/compute_instance.gif)
+```bash
+    git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
+```
 
 3. **Create Firewall policy to allow Flask to access GCP**: For Local host to access google cloud we will have to
 create a firewall rule to let port 5000 access Compute instance. To do that go to VPC/Firewall tool on google Console and create a new firewall rule.
