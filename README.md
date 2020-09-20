@@ -26,7 +26,7 @@ For the last one year, I have been part of a great learning curve wherein I have
 
 Below are the steps to setup the enviroment and run the codes:
 
-1. **Cloud account Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). We will be using a Photo to Elton John and Madonna as an input image
+1. **Cloud account Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). We will be using a Photo to Elton John and Madonna as an input image.
 
 ![](images/singers.jpg)
 
@@ -83,7 +83,7 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](images/deploy-cluster.gif)
 
-6. **Create a POST request from Local**: After this we will create a POST request from the local. To do that we will just run request.py from our local. There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
+6. **Create a POST request from Local**: After this we will create a POST request from the local. To do that clone the repository on your local and run request.py . There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
 
 ```python
     # Find Predict in Request.py file and 
@@ -92,7 +92,7 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](images/create-post-request.gif)
 
-7. **See the magic happen**: Run Request.py from local 
+7. **See the magic happen**: Run Request.py from local. The output will be stored on the local by the name Final.jpg.
 
 ```bash
     python request.py
@@ -114,3 +114,5 @@ Below are the steps to setup the enviroment and run the codes:
 3. Tim Esler's Git repo:[https://github.com/timesler/facenet-pytorch](https://github.com/timesler/facenet-pytorch)
 4. Akash Nimare's README.md: https://gist.github.com/akashnimare/7b065c12d9750578de8e705fb4771d2f#file-readme-md
 5. [Machine learning mastery](https://machinelearningmastery.com/how-to-develop-a-face-recognition-system-using-facenet-in-keras-and-an-svm-classifier/)
+6. [Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)
+7. [A Guide to Deploy Flask App on Google Kubernetes Engine](https://medium.com/google-cloud/a-guide-to-deploy-flask-app-on-google-kubernetes-engine-bfbbee5c6fb)
