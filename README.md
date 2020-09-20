@@ -30,7 +30,7 @@ Below are the steps to setup the enviroment and run the codes:
 
 ![](images/singers.jpg)
 
-2. **Creating a Docker Image of the application**: Now we have to create a Image to deploy the application on GCP. To do that we will use **cloud sdk**. To copy the application we will clone the repository in the cloud SDK with the command
+2. **Creating a Docker Image of the application**: Now we have to create a Image to deploy the application on GCP. To do that we will use **cloud sdk**. To copy the application we will clone the repository in the cloud SDK with the command given below.
 
 ```bash
     git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
