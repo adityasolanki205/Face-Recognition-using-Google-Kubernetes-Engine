@@ -90,6 +90,8 @@ Below are the steps to setup the enviroment and run the codes:
     # paste the External IP address of the Kubernetes cluster here
     url = "http://<IP address from Kubernetes>:80/predict"
 ```
+![](images/create-post-request.gif)
+
 8. **See the magic happen**: Run Request.py from local 
 
 ```bash
