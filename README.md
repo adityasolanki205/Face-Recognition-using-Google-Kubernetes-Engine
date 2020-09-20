@@ -30,71 +30,62 @@ Below are the steps to setup the enviroment and run the codes:
 
 ![](images/singers.jpg)
 
-2. **Creating a Docker Image of the application**: Now we have to create a Image to deploy the application on GCP. To do that we will use **cloud sdk**. To copy the application we will clone the repository in the cloud SDK with the command given below.
+2. **Copying the repository in SDK**: Now we have to create a Image to deploy the application on GCP. To do that we will use **cloud sdk**. To copy the application we will clone the repository in the cloud SDK with the command given below.
 
 ```bash
     git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
 ```
 
-3. **Create Firewall policy to allow Flask to access GCP**: For Local host to access google cloud we will have to
-create a firewall rule to let port 5000 access Compute instance. To do that go to VPC/Firewall tool on google Console and create a new firewall rule.
-
-![](images/firewall.gif)
-
-4. **Deploying the App on Compute Engine**: After creating the instance, we will deploy the code on the instance using SSH. So click on the SSH button to create a session to deploy our code.
+3. **Create an Docker Image of the application**: Now we will build a Docker image which will be used to be deployed on Kubernetes engine using the commands below. Run each command one by one.
 
 ```bash
-    # update system packages and install the required packages
-    sudo apt-get update
-    sudo apt-get install bzip2 libxml2-dev libsm6 libxrender1 libfontconfig1
+    #Goto the 
+    cd Face-recognition-using-kubernetes
     
-    # clone the project repo
-    git clone https://github.com/adityasolanki205/Face-recognition-on-flask.git
+    #Creating a Temporary variable to save the name of the project
+    export PROJECT_ID=<Name or your Project>
     
-    # download and install miniconda
-    wget https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86_64.sh
-    bash Miniconda3-4.7.10-Linux-x86_64.sh
+    #Creating the image of applicatin
+    gcloud builds --project $PROJECT_ID submit --tag gcr.io/$PROJECT_ID/face-app:v1 .
     
-    export PATH=/home/<your name here>/miniconda3/bin:$PATH
+    #To check avaible images
+    docker images
+```
+![](images/firewall.gif)
+
+4. **Creating Kubernetes Cluster**: After creating the image, we will create Kubernetes cluster to deploy the application on. To do so run all the commands given below one by one.
+
+```bash
+    # Setting Project Property for this activity
+    gcloud config set project $PROJECT_ID 
     
-    rm Miniconda3-4.7.10-Linux-x86_64.sh
+    # Setting Region Property for this activity
+    gcloud config set compute/region us-central1
     
-    # confirm installation
-    which conda
+    # Create Kubernetes cluster with 1 node. (Note if you are using Free GCP account, you can only create 1 node.)
+    gcloud container clusters create face-cluster --num-nodes=1
 ```
 ![](images/startup.jpg)
 
-5. **Running the App**:  Now we will run the app on the instance
+5. **Deploying the application on Kubernetres**: Now we will deploy the application on Kubernetes.
 
 ```bash
-    # Goto the Flask Folder
-    cd Face-recognition-on-flask
-    
-    # Installing all the dependencies
-    pip install -r requirements.txt
-    
-    # Running the app 
-    python app.py
+    kubectl create deployment face-app --image=gcr.io/${PROJECT_ID}/face-app:v1
 ```
 ![](images/application.jpg)
 
-6. **Creating a POST request from Local**: After this we will create a POST request from the local. To do that we will just run request.py from local. There is one thing that has to be changed in the request.py file i.e. the IP address of the instance. Copy the external IP of the instance from Google cloud Console and paste in the request.py file
+6. **Exposing the application**: After deploying we will expose the application using Load balancer. 
 
-```python
-    import requests
-    import json
-    import cv2
-    import PIL
-    from PIL import Image , ImageDraw, ImageFont
-
-
-    url = "http://<Your IP address>:5000/predict"
-    headers = {"content-type": "image/jpg"}
-    filename = 'images/singers.jpg'
+```bash
+    #Creating a load balancer to connect kubernetes cluster with outside world.
+    kubectl expose deployment face-app --type=LoadBalancer --port 80 --target-port 8080
+    
+    #To get the external IP address to your application
+    kubectl get services  
 ```
 ![](images/request.jpg)
 
-7. **See the magic happen**: Run Request.py file and see Face recognition happening on Google Cloud. This will save a final.jpg file as an output image where all know faces will be boxed.
+7. **Create a POST request from Local**: Run Request.py file and see Face recognition happening on Google Cloud. This will save a final.jpg file as an output image where all know faces will be boxed.
 
 ![](final.jpg)
     
