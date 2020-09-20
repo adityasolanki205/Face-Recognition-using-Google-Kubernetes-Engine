@@ -69,25 +69,21 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](images/create-cluster.gif)
 
-5. **Deploying the application on Kubernetres**: Now we will deploy the application on Kubernetes.
+5. **Deploying and exposing the application on Kubernetres**: Now we will deploy the application on Kubernetes.
 
 ```bash
+    #Deploy the application on Cluster created
     kubectl create deployment face-app --image=gcr.io/${PROJECT_ID}/face-app:v1
-```
-![](images/deploy-cluster.jpg)
-
-6. **Exposing the application**: After deploying we will expose the application using Load balancer. 
-
-```bash
+    
     #Creating a load balancer to connect kubernetes cluster with outside world.
     kubectl expose deployment face-app --type=LoadBalancer --port 80 --target-port 8080
     
-    #To get the external IP address to your application
-    kubectl get services  
+    #To get the external IP address to your application(This can take some time to show the IP address
+    kubectl get services
 ```
-![](images/expose-cluster.jpg)
+![](images/deploy-cluster.gif)
 
-7. **Create a POST request from Local**: After this we will create a POST request from the local. To do that we will just run request.py from our local. There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
+6. **Create a POST request from Local**: After this we will create a POST request from the local. To do that we will just run request.py from our local. There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
 
 ```python
     # Find Predict in Request.py file and 
