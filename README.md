@@ -99,6 +99,15 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](final.jpg)
 
+**Note**: The boundary boxes are color coded:
+
+    1. Aditya Solanki  : Yellow
+    2. Ben Affleck     : Blue   
+    3. Elton John      : Green
+    4. Jerry Seinfield : Red
+    5. Madonna         : Aqua
+    6. Mindy Kaling    : White
+
 8. **(Optional) To deploy newer version of the Application**: To update the application to newer version, we just have to update the Kubernetes Deployment to the newer image. Steps to do that are as follows:
 
 ```bash
@@ -108,15 +117,6 @@ Below are the steps to setup the enviroment and run the codes:
     #Set the newest version of the application on Kubernetes cluster.
     kubectl set image deployment/face-app face-app=gcr.io/${PROJECT_ID}/face-app:v2
 ```
-
-**Note**: The boundary boxes are color coded:
-
-    1. Aditya Solanki  : Yellow
-    2. Ben Affleck     : Blue   
-    3. Elton John      : Green
-    4. Jerry Seinfield : Red
-    5. Madonna         : Aqua
-    6. Mindy Kaling    : White
 
 ## Credits
 1. Special thanks to [Deploying ML Model](https://towardsdatascience.com/deploying-a-custom-ml-prediction-service-on-google-cloud-ae3be7e6d38f)
