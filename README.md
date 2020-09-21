@@ -99,7 +99,7 @@ Below are the steps to setup the enviroment and run the codes:
 ```
 ![](final.jpg)
 
-8. (Optional) To deploy newer version of the Application: To update the application to newer version, we just have to update the Deployment to the newer image. Steps to do that are as follows:
+8. **(Optional) To deploy newer version of the Application**: To update the application to newer version, we just have to update the Deployment to the newer image. Steps to do that are as follows:
 
 ```bash
     #Create a version 2 of the application
