@@ -94,9 +94,6 @@ Below are the steps to setup the enviroment and run the codes:
 
 7. **See the magic happen**: Run Request.py from local. The output will be stored on the local by the name Final.jpg.
 
-```bash
-    python request.py
-```
 ![](final.jpg)
 
 **Note**: The boundary boxes are color coded:
