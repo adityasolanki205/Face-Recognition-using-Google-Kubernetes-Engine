@@ -35,7 +35,7 @@ Below are the steps to setup the enviroment and run the codes:
 ```bash
     git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
 ```
-![](images/copy-repo.gif)
+![](images/copy-repository.gif)
 
 3. **Create an Docker Image of the application**: Now we will build a Docker image which will be used to be deployed on Kubernetes engine using the commands below. Run each command one by one.
 
