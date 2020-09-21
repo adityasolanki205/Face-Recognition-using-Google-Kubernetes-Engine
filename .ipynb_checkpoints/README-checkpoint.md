@@ -1,10 +1,10 @@
-# Facial Recognition using Flask
+# Facial Recognition using Kubernetes
 
-This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Cloud. The complete process to Train and test is present [here](https://github.com/adityasolanki205/Face-Recognition).
-This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 2 parts:
+This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Kubernetes Engine. This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training and testing this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 3 major parts:
 
-1. **Setting up the application on Google Cloud**
-2. **Create a POST request to recognize faces**
+1. **To create Docker Image of the Application**
+2. **To create Kubernetes Cluster to deploy the image**
+3. **To create a POST request to recognize faces**
 
 ![](expected.gif)
 
@@ -19,89 +19,96 @@ For the last one year, I have been part of a great learning curve wherein I have
 - [TensorFlow](https://www.tensorflow.org/)
 - [scikit-learn](https://scikit-learn.org/stable/)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
 
-
-## Code Example
-
-```bash
-    # clone this repo:
-    git clone https://github.com/adityasolanki205/Face-recognition-on-flask.git
-```
 
 ## How to use?
 
 Below are the steps to setup the enviroment and run the codes:
 
-1. **Cloud account Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). We will be using a Photo to Elton John and Madonna as an input image
+1. **Cloud account Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). We will be using a Photo to Elton John and Madonna as an input image.
 
 ![](images/singers.jpg)
 
-2. **Creating a Google Compute instance**: Now we have to create a Compute Engine Instance to deploy the app. To do that we will use **n1-standard-8** as it has larger processing power. For Boot Disk we will select **Ubuntu 18.04 LTS**. Also tick on the Allow Http traffic label to send/receive requests. At last create the instance.
-
-![](images/compute_instance.gif)
-
-3. **Create Firewall policy to allow Flask to access GCP**: For Local host to access google cloud we will have to
-create a firewall rule to let port 5000 access Compute instance. To do that go to VPC/Firewall tool on google Console and create a new firewall rule.
-
-![](images/firewall.gif)
-
-4. **Deploying the App on Compute Engine**: After creating the instance, we will deploy the code on the instance using SSH. So click on the SSH button to create a session to deploy our code.
+2. **Copying the repository in SDK**: Now we have to create a Image to deploy the application on GCP. To do that we will use **cloud sdk**. To copy the application we will clone the repository in the cloud SDK with the command given below.
 
 ```bash
-    # update system packages and install the required packages
-    sudo apt-get update
-    sudo apt-get install bzip2 libxml2-dev libsm6 libxrender1 libfontconfig1
-    
-    # clone the project repo
-    git clone https://github.com/adityasolanki205/Face-recognition-on-flask.git
-    
-    # download and install miniconda
-    wget https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86_64.sh
-    bash Miniconda3-4.7.10-Linux-x86_64.sh
-    
-    export PATH=/home/<your name here>/miniconda3/bin:$PATH
-    
-    rm Miniconda3-4.7.10-Linux-x86_64.sh
-    
-    # confirm installation
-    which conda
+    git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
 ```
-![](images/startup.jpg)
+![](images/copy-repository.gif)
 
-5. **Running the App**:  Now we will run the app on the instance
+3. **Create an Docker Image of the application**: Now we will build a Docker image which will be used to be deployed on Kubernetes engine using the commands below. Run each command one by one.
 
 ```bash
-    # Goto the Flask Folder
-    cd Face-recognition-on-flask
+    #Goto the 
+    cd Face-Recognition-using-Kubernetes
     
-    # Installing all the dependencies
-    pip install -r requirements.txt
+    #Creating a Temporary variable to save the name of the project
+    export PROJECT_ID=<Name or your Project>
     
-    # Running the app 
-    python app.py
+    #Creating the image of applicatin
+    gcloud builds --project $PROJECT_ID submit --tag gcr.io/$PROJECT_ID/face-app:v1 .
+    
+    #To check avaible images
+    docker images
 ```
-![](images/application.jpg)
+![](images/create-image.gif)
 
-6. **Creating a POST request from Local**: After this we will create a POST request from the local. To do that we will just run request.py from local. There is one thing that has to be changed in the request.py file i.e. the IP address of the instance. Copy the external IP of the instance from Google cloud Console and paste in the request.py file
+4. **Creating Kubernetes Cluster**: After creating the image, we will create Kubernetes cluster to deploy the application on. To do so run all the commands given below one by one.
+
+```bash
+    # Setting Project Property for this activity
+    gcloud config set project $PROJECT_ID 
+    
+    # Setting Region Property for this activity
+    gcloud config set compute/region us-central1
+    
+    # Create Kubernetes cluster with 1 node. 
+    # (Note if you are using Free GCP account, you can only create 1 node.)
+    gcloud container clusters create face-cluster --num-nodes=1 
+```
+![](images/create-cluster.gif)
+
+5. **Deploying and exposing the application on Kubernetres**: Now we will deploy the application on Kubernetes.
+
+```bash
+    #Deploy the application on Cluster created
+    kubectl create deployment face-app --image=gcr.io/${PROJECT_ID}/face-app:v1
+    
+    #Creating a load balancer to connect kubernetes cluster with outside world.
+    kubectl expose deployment face-app --type=LoadBalancer --port 80 --target-port 8080
+    
+    #To get the external IP address to your application(This can take some time to show the IP address
+    kubectl get services
+```
+![](images/deploy-cluster.gif)
+
+6. **Create a POST request from Local**: After this we will create a POST request from the local. To do that clone the repository on your local and run request.py . There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
 
 ```python
-    import requests
-    import json
-    import cv2
-    import PIL
-    from PIL import Image , ImageDraw, ImageFont
-
-
-    url = "http://<Your IP address>:5000/predict"
-    headers = {"content-type": "image/jpg"}
-    filename = 'images/singers.jpg'
+    # Find Predict in Request.py file and 
+    # paste the External IP address of the Kubernetes cluster here
+    url = "http://<IP address from Kubernetes>:80/predict"
 ```
-![](images/request.jpg)
+![](images/create-post-request.gif)
 
-7. **See the magic happen**: Run Request.py file and see Face recognition happening on Google Cloud. This will save a final.jpg file as an output image where all know faces will be boxed.
+7. **See the magic happen**: Run Request.py from local. The output will be stored on the local by the name Final.jpg.
 
+```bash
+    python request.py
+```
 ![](final.jpg)
+
+8. (Optional) To deploy newer version of the Application: To update the application to newer version, we just have to update the Deployment to the newer image. Steps to do that are as follows:
+
+```bash
+    #Create a version 2 of the application
+    gcloud builds --project $PROJECT_ID submit --tag gcr.io/$PROJECT_ID/face-app:v2 .
     
+    #Set the newest version of the application on Kubernetes cluster.
+    kubectl set image deployment/face-app face-app=gcr.io/${PROJECT_ID}/face-app:v2
+```
+
 **Note**: The boundary boxes are color coded:
 
     1. Aditya Solanki  : Yellow
@@ -117,3 +124,5 @@ create a firewall rule to let port 5000 access Compute instance. To do that go t
 3. Tim Esler's Git repo:[https://github.com/timesler/facenet-pytorch](https://github.com/timesler/facenet-pytorch)
 4. Akash Nimare's README.md: https://gist.github.com/akashnimare/7b065c12d9750578de8e705fb4771d2f#file-readme-md
 5. [Machine learning mastery](https://machinelearningmastery.com/how-to-develop-a-face-recognition-system-using-facenet-in-keras-and-an-svm-classifier/)
+6. [Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)
+7. [A Guide to Deploy Flask App on Google Kubernetes Engine](https://medium.com/google-cloud/a-guide-to-deploy-flask-app-on-google-kubernetes-engine-bfbbee5c6fb)
