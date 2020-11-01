@@ -35,7 +35,6 @@ Below are the steps to setup the enviroment and run the codes:
 ```bash
     git clone https://github.com/adityasolanki205/Face-Recognition-using-Kubernetes.git
 ```
-![](images/copy-repository.gif)
 
 3. **Create an Docker Image of the application**: Now we will build a Docker image which will be used to be deployed on Kubernetes engine using the commands below. Run each command one by one.
 
@@ -52,7 +51,6 @@ Below are the steps to setup the enviroment and run the codes:
     #To check avaible images
     docker images
 ```
-![](images/create-image.gif)
 
 4. **Creating Kubernetes Cluster**: After creating the image, we will create Kubernetes cluster to deploy the application on. To do so run all the commands given below one by one.
 
@@ -67,7 +65,6 @@ Below are the steps to setup the enviroment and run the codes:
     # (Note if you are using Free GCP account, you can only create 1 node.)
     gcloud container clusters create face-cluster --num-nodes=1 
 ```
-![](images/create-cluster.gif)
 
 5. **Deploying and exposing the application on Kubernetres**: Now we will deploy the application on Kubernetes.
 
@@ -81,7 +78,6 @@ Below are the steps to setup the enviroment and run the codes:
     #To get the external IP address to your application(This can take some time to show the IP address
     kubectl get services
 ```
-![](images/deploy-cluster.gif)
 
 6. **Create a POST request from Local**: After this we will create a POST request from the local. To do that clone the repository on your local and run request.py . There is one thing that has to be changed in the request.py file i.e. the External IP address of the Kubernetes. Copy the external IP of the Kubernetes from the Load Balancer and paste it on request.py. 
 
@@ -90,7 +86,6 @@ Below are the steps to setup the enviroment and run the codes:
     # paste the External IP address of the Kubernetes cluster here
     url = "http://<IP address from Kubernetes>:80/predict"
 ```
-![](images/create-post-request.gif)
 
 7. **See the magic happen**: Run Request.py from local. The output will be stored on the local by the name Final.jpg.
 
