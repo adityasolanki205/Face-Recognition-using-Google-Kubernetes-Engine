@@ -1,4 +1,4 @@
-# Facial Recognition using Kubernetes
+# Facial Recognition using Google Kubernetes Engine
 
 This is a Facial Recognition application developed for **learning and implementation purpose only**. In this repository we will just implement this application using Flask Architecture to run it on Google Kubernetes Engine. This model is trained to detect and recognise faces of six individuals namely Aditya Solanki(Author), Ben Affleck, Madonna, Elton John, Jerry Seinfled, Mindy Kaling. The repository for training and testing this model can be found [here](https://github.com/adityasolanki205/Face-Recognition). This Repository is divided into 3 major parts:
 
