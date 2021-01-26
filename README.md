@@ -62,7 +62,7 @@ Below are the steps to setup the enviroment and run the codes:
     gcloud config set compute/region us-central1
     
     # Create Kubernetes cluster with 1 node. 
-    # (Note if you are using Free GCP account, you can only create 1 node.)
+    # (Note if you are using Free GCP account, you can only create 1 node per zone.)
     gcloud container clusters create face-cluster --num-nodes=1 
 ```
 
