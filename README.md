@@ -114,7 +114,7 @@ Below are the steps to setup the enviroment and run the codes:
 1. Special thanks to [Deploying ML Model](https://towardsdatascience.com/deploying-a-custom-ml-prediction-service-on-google-cloud-ae3be7e6d38f)
 2. [David Sandberg's facenet repo](https://github.com/davidsandberg/facenet](https://github.com/davidsandberg/facenet)
 3. [Tim Esler's Git repo](https://github.com/timesler/facenet-pytorch](https://github.com/timesler/facenet-pytorch)
-4. Akash Nimare's README.md: https://gist.github.com/akashnimare/7b065c12d9750578de8e705fb4771d2f#file-readme-md
+4. [Akash Nimare's README.md](https://gist.github.com/akashnimare/7b065c12d9750578de8e705fb4771d2f#file-readme-md)
 5. [Machine learning mastery](https://machinelearningmastery.com/how-to-develop-a-face-recognition-system-using-facenet-in-keras-and-an-svm-classifier/)
 6. [Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)
 7. [A Guide to Deploy Flask App on Google Kubernetes Engine](https://medium.com/google-cloud/a-guide-to-deploy-flask-app-on-google-kubernetes-engine-bfbbee5c6fb)
