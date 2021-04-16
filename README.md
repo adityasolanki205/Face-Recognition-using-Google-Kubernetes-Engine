@@ -48,7 +48,7 @@ Below are the steps to setup the enviroment and run the codes:
     #Creating the image of applicatin
     gcloud builds --project $PROJECT_ID submit --tag gcr.io/$PROJECT_ID/face-app:v1 .
     
-    #To check avaible images
+    #To check available images
     docker images
 ```
 
